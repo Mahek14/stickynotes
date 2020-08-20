@@ -21,6 +21,10 @@ app.get("/",(req,res)=>{
     res.render("note")
 });
 
+app.post("/",(req,res)=>{
+    console.log("DOne");
+})
+
 app.listen(3000, () => {
     console.log("Server runing at port 3000");
 });
