@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -25,6 +26,6 @@ app.post("/",(req,res)=>{
     console.log("DOne");
 })
 
-app.listen(3000, () => {
-    console.log("Server runing at port 3000");
-});
+const port = process.env.PORT || 3000 ; 
+
+app.listen(port, () => console.log('listening on port ' + port));
