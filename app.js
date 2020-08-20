@@ -13,17 +13,38 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-// mongoose.connect("mongodb://localhost:27017/StickyNotesDB", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useCreateIndex:true,
+    useUnifiedTopology: true
+});
+
+const noteSchema = {
+    title:String,
+    content:String
+};
+
+const Note = mongoose.model("Note",noteSchema)
+
 
 app.get("/",(req,res)=>{
-    res.render("note")
+    Note.find({}, function(err, notes){
+        res.render("note", {
+          notes: notes
+          });
+      });
 });
 
 app.post("/",(req,res)=>{
-    console.log("DOne");
+    const note = new Note({
+        title:req.body.noteTitle,
+        content:req.body.noteBody
+    })
+    note.save(function(err){
+        if (!err){
+            res.redirect("/");
+        }
+      });
 })
 
 const port = process.env.PORT || 3000 ; 

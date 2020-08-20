@@ -1,13 +1,18 @@
 <%- include("header") %>
 
-<form action="/" method="get" class="note">
-    <input type="text" placeholder="Add Title"><br>
-    <textarea placeholder="Add Note"></textarea><br>
-    <button><i class="fa fa-plus" aria-hidden="true"></i></button>
+<form action="/" method="POST" class="note">
+    <input type="text" name="noteTitle" placeholder="Add Title"><br>
+    <textarea placeholder="Add Note" name="noteBody"></textarea><br>
+    <button type="submit"><i class="fa fa-plus" aria-hidden="true"></i></button>
 </form>
 
-
-
+<%  notes.forEach((note) => { %>
+    <div class="created-note">
+        <h1><%= note.title  %> </h1>
+        <p><%= note.content %> </p>
+        <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+<% }) %>
 
 
 

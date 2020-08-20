@@ -23,16 +23,48 @@ img {
     height: 50%;
 }
 
-button {
+.created-note {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 3px 5px rgb(255, 81, 0);
+    padding: 10px;
+    width: 240px;
+    margin: 16px;
+    float: left;
+}
+
+.created-note h1 {
+    font-size: 1.1em;
+    margin-bottom: 6px;
+}
+
+.created-note p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.created-note button {
     position: relative;
     float: right;
-    margin-right: 10px;
-    color: #f5ba13;
-    border: none;
+    background-color: #ffee01;
+    font-size:20px;
+    box-shadow: 0 4px 3px rgb(15, 15, 15);
+    color: #070707;
+    border: black 3px;
+    right: 18px;
+    bottom: -18px;
     width: 36px;
     height: 36px;
     cursor: pointer;
+    border-radius: 50%;
     outline: none;
+    opacity: 1;
+    transition: 0.4s;
+}
+.created-note button:hover{
+    opacity: 0.5;
 }
 
 form.note {
@@ -59,9 +91,10 @@ form.note textarea {
 form.note button {
     position: absolute;
     right: 18px;
+    font-size:20px;
     bottom: -18px;
-    background: linear-gradient(#ff5e01, rgba(255, 177, 32, 0.596));
-    color: #fff;
+    background: #ffee01;
+    color: rgb(12, 12, 12);
     border: none;
     border-radius: 50%;
     width: 36px;
@@ -69,4 +102,9 @@ form.note button {
     box-shadow: 0 4px 3px rgb(15, 15, 15);
     cursor: pointer;
     outline: none;
+    opacity: 1;
+    transition: 0.4s;
+}
+form.note button :hover{
+    opacity: 0.5;
 }
