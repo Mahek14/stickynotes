@@ -1,20 +1,27 @@
 <%- include("header") %>
 
 <form action="/" method="POST" class="note">
-    <input type="text" name="noteTitle" placeholder="Add Title"><br>
+    <input type="text" name="noteTitle" placeholder="Add Title" autocomplete="off"><br>
     <textarea placeholder="Add Note" name="noteBody"></textarea><br>
     <button type="submit"><i class="fa fa-plus" aria-hidden="true"></i></button>
 </form>
-
+<div class="created-note">
+    <h1>Google Clone Keeper App</h1>
+    <p>This Note cannot be deleted.It is for reference purpose.</p>
+    <button disabled="disabled">
+    <i class="fa fa-trash" aria-hidden="true"></i></button>
+</div>
 <%  notes.forEach((note) => { %>
+
     <div class="created-note">
         <h1><%= note.title  %> </h1>
         <p><%= note.content %> </p>
-        <button><i class="fa fa-trash" aria-hidden="true"></i></button>
-    </div>
+        <form action="/delete" method="POST">
+        <button type="submit" name="delete" value="<%= note._id %>">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+</div>
+</form>
 <% }) %>
 
-
-
-
-<%- include('footer') %> 
+<%- include('footer') %>

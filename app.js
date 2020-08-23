@@ -15,38 +15,48 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
-    useCreateIndex:true,
+    useCreateIndex: true,
+    useFindAndModify: false,
     useUnifiedTopology: true
 });
 
 const noteSchema = {
-    title:String,
-    content:String
+    title: String,
+    content: String
 };
 
-const Note = mongoose.model("Note",noteSchema)
+const Note = mongoose.model("Note", noteSchema)
 
 
-app.get("/",(req,res)=>{
-    Note.find({}, function(err, notes){
+app.get("/", (req, res) => {
+    Note.find({}, function (err, notes) {
         res.render("note", {
-          notes: notes
-          });
-      });
+            notes: notes
+        });
+    });
 });
 
-app.post("/",(req,res)=>{
+app.post("/", (req, res) => {
     const note = new Note({
-        title:req.body.noteTitle,
-        content:req.body.noteBody
+        title: req.body.noteTitle,
+        content: req.body.noteBody
     })
-    note.save(function(err){
-        if (!err){
+    note.save(function (err) {
+        if (!err) {
             res.redirect("/");
         }
-      });
+    });
+});
+
+app.post("/delete", (req, res) => {
+    const deleteNote = req.body.delete
+    Note.findByIdAndRemove(deleteNote, (err) => {
+        if (!err) {
+            res.redirect("/")
+        }
+    })
 })
 
-const port = process.env.PORT || 3000 ; 
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log('listening on port ' + port));
